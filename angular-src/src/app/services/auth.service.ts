@@ -9,21 +9,23 @@ export class AuthService {
   authToken: any;
   user: any;
 
+// tslint:disable-next-line: deprecation
   constructor(private http: Http) {
-      this.isDev = true;  // Change to false before deployment
+      // this.isDev = true;  // Change to false before deployment
       }
 
   registerUser(user) {
-    let headers = new Headers();
+// tslint:disable-next-line: deprecation
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/register', user, {headers: headers})
+    return this.http.post('http://localhost:3000/users/register', user, {headers: headers})
       .map(res => res.json());
   }
 
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/authenticate', user, {headers: headers})
+    return this.http.post('http://localhost:3000/users/authenticate', user, {headers: headers})
       .map(res => res.json());
   }
 
@@ -32,7 +34,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('users/profile', {headers: headers})
+    return this.http.get('http://localhost:3000/users/profile', {headers: headers})
       .map(res => res.json());
   }
 
